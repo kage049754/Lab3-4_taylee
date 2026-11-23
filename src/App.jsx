@@ -1,14 +1,48 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "./components/ProductCard.jsx";
+import SearchBar from "./components/SearchBar.jsx";
 import products from "./data/products.js";
 
 function App() {
   const [cartCount, setCartCount] = useState(0);
   const [lastAdded, setLastAdded] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [category, setCategory] = useState("All");
+  const [sortOrder, setSortOrder] = useState("default");
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchText);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [searchText]);
+
+  const normalizedSearch = debouncedSearch.trim().toLowerCase();
+  const filteredProducts = [...products]
+    .filter((product) => product.title.toLowerCase().includes(normalizedSearch))
+    .filter((product) => category === "All" || product.category === category)
+    .sort((a, b) => {
+      if (sortOrder === "low-to-high") return a.price - b.price;
+      if (sortOrder === "high-to-low") return b.price - a.price;
+      return 0;
+    });
+
+  useEffect(() => {
+    document.title = `CvSU Mini Store (${filteredProducts.length} results)`;
+  }, [filteredProducts.length]);
 
   function handleAddToCart(productTitle) {
     setCartCount((count) => count + 1);
     setLastAdded(productTitle);
+  }
+
+  function clearFilters() {
+    setSearchText("");
+    setDebouncedSearch("");
+    setCategory("All");
+    setSortOrder("default");
   }
 
   return (
@@ -39,23 +73,43 @@ function App() {
       <section className="catalog-section">
         <div className="section-heading">
           <div><p className="eyebrow">THE COLLECTION</p><h2>Browse products</h2></div>
-          <span className="product-total">{products.length} products</span>
+          <span className="product-total">Showing {filteredProducts.length} of {products.length} products</span>
         </div>
-        <div className="product-grid">
-          {products.map((product, index) => (
-            <ProductCard
-              key={product.id}
-              title={product.title}
-              price={product.price}
-              category={product.category}
-              inStock={product.inStock}
-              onAddToCart={handleAddToCart}
-            >
-              {index === 0 && <span className="product-badge product-badge--new">New</span>}
-              {index === 4 && <span className="product-badge product-badge--sale">Popular</span>}
-            </ProductCard>
-          ))}
-        </div>
+
+        <SearchBar
+          searchText={searchText}
+          onSearchTextChange={setSearchText}
+          category={category}
+          onCategoryChange={setCategory}
+          sortOrder={sortOrder}
+          onSortOrderChange={setSortOrder}
+          onClearFilters={clearFilters}
+        />
+
+        {filteredProducts.length > 0 ? (
+          <div className="product-grid">
+            {filteredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                title={product.title}
+                price={product.price}
+                category={product.category}
+                inStock={product.inStock}
+                onAddToCart={handleAddToCart}
+              >
+                {product.id === 1 && <span className="product-badge product-badge--new">New</span>}
+                {product.id === 5 && <span className="product-badge product-badge--sale">Popular</span>}
+              </ProductCard>
+            ))}
+          </div>
+        ) : (
+          <div className="empty-state">
+            <span className="empty-state__icon" aria-hidden="true">⌕</span>
+            <h3>No products found.</h3>
+            <p>Try a different keyword or category.</p>
+            <button type="button" onClick={clearFilters}>Clear filters</button>
+          </div>
+        )}
       </section>
 
       <footer className="site-footer">CvSU Mini Store <span>•</span> DCIT26 Application Development and Emerging Technologies</footer>
