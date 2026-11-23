@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root{font-family:"DM Sans",sans-serif;color:#172b24;background:#f5f7f3;font-synthesis:none;text-rendering:optimizeLegibility}
+*{box-sizing:border-box}
+body{margin:0;min-width:320px}
+button{font:inherit}
+.app-shell{max-width:1180px;margin:0 auto;padding:0 36px}
+.site-header{height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e3e9e1}
+.brand{display:flex;align-items:center;gap:11px;color:#173d2d;text-decoration:none;font-size:16px}
+.brand strong{font-weight:800}
+.brand-mark{width:34px;height:34px;display:grid;place-items:center;background:#174b36;color:white;border-radius:10px;font-family:Manrope;font-weight:800}
+.header-note,.product-total{font-size:13px;color:#78877e}
+.hero{padding:72px 0 42px}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:1.7px;color:#63806e;margin:0 0 14px}
+.hero h1{font:800 clamp(38px,6vw,64px)/1.08 Manrope,sans-serif;letter-spacing:-2.8px;margin:0;color:#163b2c}
+.hero h1 span{color:#80a58b}
+.hero-copy{color:#748178;margin:18px 0 0;font-size:15px}
+.cart-summary{display:flex;align-items:center;gap:15px;background:#e9f1e9;border:1px solid #dce8dc;border-radius:14px;padding:17px 20px;margin:0 0 54px}
+.cart-symbol{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:#d6e6d7;color:#285c3d;font-size:20px}
+.cart-label{font-size:9px;letter-spacing:1.5px;color:#64806b;margin:0 0 4px;font-weight:700}
+.cart-summary strong{font-size:13px;font-weight:600}
+.cart-count{margin-left:auto;width:34px;height:34px;display:grid;place-items:center;background:#174b36;color:white;border-radius:50%;font-weight:700;font-size:13px}
+.catalog-section{padding-bottom:60px}
+.section-heading{display:flex;align-items:end;justify-content:space-between;margin-bottom:22px}
+.section-heading .eyebrow{margin-bottom:7px}
+.section-heading h2{font:800 25px Manrope,sans-serif;letter-spacing:-.7px;margin:0}
+.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px}
+.product-card{position:relative;min-width:0;background:#fff;border:1px solid #e8ede7;border-radius:15px;padding:17px;transition:transform .2s,box-shadow .2s}
+.product-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #1b40200d}
+.product-card--unavailable{background:#f1f3f0;opacity:.62}
+.product-card__topline{height:25px;display:flex;justify-content:space-between;align-items:center;gap:6px}
+.product-category{font-size:10px;color:#728078;font-weight:600}
+.product-badge{font-size:9px;font-weight:700;padding:5px 8px;border-radius:20px}
+.product-badge--new{color:#276444;background:#e5f2e8}
+.product-badge--sale{color:#98652c;background:#fff1db}
+.product-card__icon{height:100px;display:grid;place-items:center;margin:9px 0 10px;background:linear-gradient(135deg,#f1f5ef,#e8f0e8);border-radius:10px;color:#4e795c;font-size:42px;font-family:Manrope}
+.product-card h2{font:700 14px Manrope,sans-serif;margin:0 0 8px;min-height:38px}
+.product-price{font-size:17px;font-weight:700;margin:0 0 17px;color:#1d4d35}
+.product-card__footer{border-top:1px solid #edf0ec;padding-top:13px;display:flex;flex-direction:column;gap:12px}
+.stock-status{font-size:10px;display:flex;align-items:center;gap:6px;font-weight:600}
+.stock-status--in{color:#34784c}.stock-status--out{color:#a36a54}
+.status-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+.product-card button{border:0;border-radius:8px;padding:10px 12px;background:#174b36;color:white;font-size:11px;font-weight:700;cursor:pointer;transition:background .2s}
+.product-card button:hover:not(:disabled){background:#236647}
+.product-card button:disabled{background:#c7cec8;color:#737d75;cursor:not-allowed}
+.site-footer{border-top:1px solid #e3e9e1;padding:24px 0 32px;text-align:center;font-size:10px;color:#87938a}
+.site-footer span{padding:0 5px}
+@media(max-width:900px){.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.app-shell{padding:0 18px}.site-header{height:68px}.header-note{display:none}.hero{padding:52px 0 32px}.hero h1{letter-spacing:-1.8px}.cart-summary{margin-bottom:40px;padding:14px}.cart-summary strong{font-size:11px}.product-grid{gap:11px}.product-card{padding:12px}.product-card__icon{height:78px}.product-card h2{font-size:12px}.section-heading h2{font-size:22px}.site-footer{line-height:1.7}}
